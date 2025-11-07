@@ -1,280 +1,221 @@
-USER:
-CREATE(:User{nome:'Beatriz',idade:19});
-CREATE(:User{nome:'Pedro',idade:23});
-CREATE(:User{nome:'Carlos',idade:21});
-CREATE(:User{nome:'Aryelle',idade:20});
-CREATE(:User{nome:'Felipe',idade:30});
-CREATE(:User{nome:'Nathalia',idade:18});
-CREATE(:User{nome:'Lucas',idade:28});
-CREATE(:User{nome:'Nilton',idade:49});
-CREATE(:User{nome:'Larissa',idade:32});
-CREATE(:User{nome:'Gustavo',idade:52});
+// --------------------------------------------------------
+// 1. LIMPEZA (OPCIONAL)
+// --------------------------------------------------------
+// Este comando limpa o banco de dados inteiro. Use com cautela!
+// MATCH (n) DETACH DELETE n;
 
-MOVIE:
-CREATE(:Movie{nome:'Sinners',anoLançamento:2025,classificacao:'+16'});
-CREATE(:Movie{nome:'M3GAN 2.0',anoLançamento:2025,classificacao:'+16'});
-CREATE(:Movie{nome:'Ichi the killer',anoLançamento:2001,classificacao:'+18'});
-CREATE(:Movie{nome:'A Cinco Passos de Você',anoLançamento:2019,classificacao:'+12'});
-CREATE(:Movie{nome:'Whiplash',anoLançamento:2014,classificacao:'+12'});
-CREATE(:Movie{nome:'Black Phone',anoLançamento:2021,classificacao:'+16'});
-CREATE(:Movie{nome:'Pantera Negra',anoLançamento:2018,classificacao:'+14'});
-CREATE(:Movie{nome:'Tremembé',anoLançamento:2025,classificacao:'+16'});
-CREATE(:Movie{nome:'Oppenheimer',anoLançamento:2023,classificacao:'+16'});
-CREATE(:Movie{nome:'Titanic',anoLançamento:1997,classificacao:'+12'});
+// --------------------------------------------------------
+// 2. CRIAÇÃO DE NÓS: USERS
+// --------------------------------------------------------
+MERGE (:User{nome:'Beatriz',idade:19});
+MERGE (:User{nome:'Pedro',idade:23});
+MERGE (:User{nome:'Carlos',idade:21});
+MERGE (:User{nome:'Aryelle',idade:20});
+MERGE (:User{nome:'Felipe',idade:30});
+MERGE (:User{nome:'Nathalia',idade:18});
+MERGE (:User{nome:'Lucas',idade:28});
+MERGE (:User{nome:'Nilton',idade:49});
+MERGE (:User{nome:'Larissa',idade:32});
+MERGE (:User{nome:'Gustavo',idade:52});
 
-RELAÇÃO ENTRE USER E MOVIE - WATCHED
+// --------------------------------------------------------
+// 3. CRIAÇÃO DE NÓS: MOVIES & SERIES
+// (Tremembé corrigido para Series)
+// --------------------------------------------------------
+MERGE (:Movie{nome:'Sinners',anoLançamento:2025,classificacao:'+16'});
+MERGE (:Movie{nome:'M3GAN 2.0',anoLançamento:2025,classificacao:'+16'});
+MERGE (:Movie{nome:'Ichi the killer',anoLançamento:2001,classificacao:'+18'});
+MERGE (:Movie{nome:'A Cinco Passos de Você',anoLançamento:2019,classificacao:'+12'});
+MERGE (:Movie{nome:'Whiplash',anoLançamento:2014,classificacao:'+12'});
+MERGE (:Movie{nome:'Black Phone',anoLançamento:2021,classificacao:'+16'});
+MERGE (:Movie{nome:'Pantera Negra',anoLançamento:2018,classificacao:'+14'});
+MERGE (:Movie{nome:'Oppenheimer',anoLançamento:2023,classificacao:'+16'});
+MERGE (:Movie{nome:'Titanic',anoLançamento:1997,classificacao:'+12'});
 
-BEATRIZ:
-MATCH(betriz:User{nome:'Beatriz'}),(sinners:Movie{nome:'Sinners'})
-CREATE(betriz)-[:WATCHED]->(sinners);
-MATCH(betriz:User{nome:'Beatriz'}),(ichi:Movie{nome:'Ichi the killer'})
-CREATE(betriz)-[:WATCHED]->(ichi);
-MATCH(betriz:User{nome:'Beatriz'}),(pantera:Movie{nome:'Pantera Negra'})
-CREATE(betriz)-[:WATCHED]->(pantera);
+// Séries
+MERGE (:Series {nome:'Peaky Blinders', anoLançamento:2013, classificacao:'+16'});
+MERGE (:Series {nome:'Tremembé', anoLançamento:2025, classificacao:'+16'}); // CORRIGIDO para Series
+MERGE (:Series {nome:'The Umbrella Academy', anoLançamento:2019, classificacao:'+16'});
+MERGE (:Series {nome:'WandaVision', anoLançamento:2021, classificacao:'+12'});
+MERGE (:Series {nome:'Black Mirror', anoLançamento:2011, classificacao:'+18'});
 
-PEDRO:
-MATCH(pedro:User{nome:'Pedro'}),(sinners:Movie{nome:'Sinners'})
-CREATE(pedro)-[:WATCHED]->(sinners);
-MATCH(pedro:User{nome:'Pedro'}),(megan:Movie{nome:'M3GAN 2.0'})
-CREATE(pedro)-[:WATCHED]->(megan);
-MATCH(pedro:User{nome:'Pedro'}),(ichi:Movie{nome:'Ichi the killer'})
-CREATE(pedro)-[:WATCHED]->(ichi);
-MATCH(pedro:User{nome:'Pedro'}),(passos:Movie{nome:'A Cinco Passos de Você'})
-CREATE(pedro)-[:WATCHED]->(passos);
-MATCH(pedro:User{nome:'Pedro'}),(phone:Movie{nome:'Black Phone'})
-CREATE(pedro)-[:WATCHED]->(phone);
-MATCH(pedro:User{nome:'Pedro'}),(pantera:Movie{nome:'Pantera Negra'})
-CREATE(pedro)-[:WATCHED]->(pantera);
+// --------------------------------------------------------
+// 4. CRIAÇÃO DE NÓS: ACTORS
+// --------------------------------------------------------
+MERGE (:Actor{nome:'Miles Caton'});
+MERGE (:Actor{nome:'Michael B. Jordan'});
+MERGE (:Actor{nome:'Chadwick Boseman'});
+MERGE (:Actor{nome:"Lupita Nyong'o"});
+MERGE (:Actor{nome:'Allison Williams'});
+MERGE (:Actor{nome:'Violet McGraw'});
+MERGE (:Actor{nome:'Amie Donald'});
+MERGE (:Actor{nome:'Tadanobu Asano'});
+MERGE (:Actor{nome:'Nao Ômori'});
+MERGE (:Actor{nome:"Shin'ya Tsukamoto"});
+MERGE (:Actor{nome:'Haley Lu Richardson'});
+MERGE (:Actor{nome:'Moises Arias'});
+MERGE (:Actor{nome:'Cillian Murphy'});
+MERGE (:Actor{nome:'Emily Blunt'});
+MERGE (:Actor{nome:'Robert Downey Jr.'});
+MERGE (:Actor{nome:'Mason Thames'});
+MERGE (:Actor{nome:'Madeleine McGraw'});
+MERGE (:Actor{nome:'Ethan Hawke'});
+MERGE (:Actor{nome:'Bianca Comparato'});
+MERGE (:Actor{nome:'Kate Winslet'});
+MERGE (:Actor{nome:'Marina Ruy Barbosa'});
 
-CARLOS:
-MATCH(carlos:User{nome:'Carlos'}),(sinners:Movie{nome:'Sinners'})
-CREATE(carlos)-[:WATCHED]->(sinners);
-MATCH(carlos:User{nome:'Carlos'}),(passos:Movie{nome:'A Cinco Passos de Você'})
-CREATE(carlos)-[:WATCHED]->(passos);
-MATCH(carlos:User{nome:'Carlos'}),(pantera:Movie{nome:'Pantera Negra'})
-CREATE(carlos)-[:WATCHED]->(pantera);
-MATCH(carlos:User{nome:'Carlos'}),(whiplash:Movie{nome:'Whiplash'})
-CREATE(carlos)-[:WATCHED]->(whiplash);
-MATCH(carlos:User{nome:'Carlos'}),(oppenheimer:Movie{nome:'Oppenheimer'})
-CREATE(carlos)-[:WATCHED]->(oppenheimer);
+// --------------------------------------------------------
+// 5. CRIAÇÃO DE NÓS: DIRECTORS (Todos)
+// --------------------------------------------------------
+MERGE (:Director {nome:'Ryan Coogler'});
+MERGE (:Director {nome:'Gerard Johnstone'});
+MERGE (:Director {nome:'Takashi Miike'});
+MERGE (:Director {nome:'Justin Baldoni'});
+MERGE (:Director {nome:'Christopher Nolan'});
+MERGE (:Director {nome:'Scott Derrickson'});
+MERGE (:Director {nome:'Daniel Lieff'});
+MERGE (:Director {nome:'Jeremy Webb'});
+MERGE (:Director {nome:'Matt Shakman'});
+MERGE (:Director {nome:'Jodie Foster'});
 
-ARYELLE:
-MATCH(ary:User{nome:'Aryelle'}),(ichi:Movie{nome:'Ichi the killer'})
-CREATE(ary)-[:WATCHED]->(ichi);
-MATCH(ary:User{nome:'Aryelle'}),(phone:Movie{nome:'Black Phone'})
-CREATE(ary)-[:WATCHED]->(phone);
+// --------------------------------------------------------
+// 6. CRIAÇÃO DE NÓS: CATEGORIAS (GENRE)
+// --------------------------------------------------------
+MERGE (:Genre {nome: 'Ação'});
+MERGE (:Genre {nome: 'Ficção Científica'});
+MERGE (:Genre {nome: 'Suspense'});
+MERGE (:Genre {nome: 'Drama'});
+MERGE (:Genre {nome: 'Romance'});
+MERGE (:Genre {nome: 'Terror'});
+MERGE (:Genre {nome: 'Comédia'});
+MERGE (:Genre {nome: 'História'});
 
-FELIPE:
-MATCH(felipe:User{nome:'Felipe'}),(whiplash:Movie{nome:'Whiplash'})
-CREATE(felipe)-[:WATCHED]->(whiplash);
-MATCH(felipe:User{nome:'Felipe'}),(titanic:Movie{nome:'Titanic'})
-CREATE(felipe)-[:WATCHED]->(titanic);
 
-NATHALIA:
-MATCH(nath:User{nome:'Nathalia'}),(passos:Movie{nome:'A Cinco Passos de Você'})
-CREATE(nath)-[:WATCHED]->(passos);
-MATCH(nath:User{nome:'Nathalia'}),(oppenheimer:Movie{nome:'Oppenheimer'})
-CREATE(nath)-[:WATCHED]->(oppenheimer);
+// ########################################################
+// #                      RELAÇÕES                        #
+// ########################################################
 
-LUCAS:
-MATCH(lucas:User{nome:'Lucas'}),(oppenheimer:Movie{nome:'Oppenheimer'})
-CREATE(lucas)-[:WATCHED]->(oppenheimer);
+// --------------------------------------------------------
+// 7. RELAÇÃO: OBRA E GÊNERO (IN_GENRE)
+// --------------------------------------------------------
+MATCH (m:Movie {nome:'Pantera Negra'}), (g1:Genre {nome:'Ação'}), (g2:Genre {nome:'Ficção Científica'}) MERGE (m)-[:IN_GENRE]->(g1) MERGE (m)-[:IN_GENRE]->(g2);
+MATCH (m:Movie {nome:'Oppenheimer'}), (g1:Genre {nome:'História'}), (g2:Genre {nome:'Drama'}) MERGE (m)-[:IN_GENRE]->(g1) MERGE (m)-[:IN_GENRE]->(g2);
+MATCH (m:Movie {nome:'Black Phone'}), (g1:Genre {nome:'Terror'}), (g2:Genre {nome:'Suspense'}) MERGE (m)-[:IN_GENRE]->(g1) MERGE (m)-[:IN_GENRE]->(g2);
+MATCH (m:Movie {nome:'A Cinco Passos de Você'}), (g1:Genre {nome:'Romance'}), (g2:Genre {nome:'Drama'}) MERGE (m)-[:IN_GENRE]->(g1) MERGE (m)-[:IN_GENRE]->(g2);
+MATCH (m:Movie {nome:'Ichi the killer'}), (g1:Genre {nome:'Terror'}), (g2:Genre {nome:'Ação'}) MERGE (m)-[:IN_GENRE]->(g1) MERGE (m)-[:IN_GENRE]->(g2);
+MATCH (m:Movie {nome:'Titanic'}), (g1:Genre {nome:'Romance'}), (g2:Genre {nome:'Drama'}) MERGE (m)-[:IN_GENRE]->(g1) MERGE (m)-[:IN_GENRE]->(g2);
+MATCH (m:Movie {nome:'M3GAN 2.0'}), (g1:Genre {nome:'Terror'}), (g2:Genre {nome:'Ficção Científica'}) MERGE (m)-[:IN_GENRE]->(g1) MERGE (m)-[:IN_GENRE]->(g2);
+MATCH (m:Movie {nome:'Sinners'}),(g1:Genre {nome:'Terror'}), (g2:Genre {nome:'Suspense'}) MERGE (m)-[:IN_GENRE]->(g1) MERGE (m)-[:IN_GENRE]->(g2);
 
-NILTON:
-MATCH(nilton:User{nome:'Nilton'}),(megan:Movie{nome:'M3GAN 2.0'})
-CREATE(nilton)-[:WATCHED]->(megan);
-MATCH(nilton:User{nome:'Nilton'}),(titanic:Movie{nome:'Titanic'})
-CREATE(nilton)-[:WATCHED]->(titanic);
+// Gêneros das Séries
+MATCH (s:Series {nome:'Black Mirror'}), (g1:Genre {nome:'Ficção Científica'}), (g2:Genre {nome:'Suspense'}) MERGE (s)-[:IN_GENRE]->(g1) MERGE (s)-[:IN_GENRE]->(g2);
+MATCH (s:Series {nome:'The Umbrella Academy'}), (g1:Genre {nome:'Ficção Científica'}), (g2:Genre {nome:'Ação'}) MERGE (s)-[:IN_GENRE]->(g1) MERGE (s)-[:IN_GENRE]->(g2);
+MATCH (s:Series {nome:'WandaVision'}), (g1:Genre {nome:'Ficção Científica'}), (g2:Genre {nome:'Comédia'}) MERGE (s)-[:IN_GENRE]->(g1) MERGE (s)-[:IN_GENRE]->(g2);
+MATCH (s:Series {nome:'Peaky Blinders'}), (g1:Genre {nome:'Drama'}), (g2:Genre {nome:'História'}) MERGE (s)-[:IN_GENRE]->(g1) MERGE (s)-[:IN_GENRE]->(g2);
+// Gêneros de Tremembé
+MATCH (s:Series {nome:'Tremembé'}), (g1:Genre {nome:'Drama'}), (g2:Genre {nome:'Suspense'}) MERGE (s)-[:IN_GENRE]->(g1) MERGE (s)-[:IN_GENRE]->(g2);
 
-LARISSA:
-MATCH(larissa:User{nome:'Larissa'}),(pantera:Movie{nome:'Pantera Negra'})
-CREATE(larissa)-[:WATCHED]->(pantera);
-MATCH(larissa:User{nome:'Larissa'}),(tremembe:Movie{nome:'Tremembé'})
-CREATE(larissa)-[:WATCHED]->(tremembe);
+// --------------------------------------------------------
+// 8. RELAÇÃO: ATOR E OBRA (ACTED_IN)
+// --------------------------------------------------------
+// Filmes
+MATCH (a:Actor {nome: 'Michael B. Jordan'}), (b:Actor {nome: 'Chadwick Boseman'}), (c:Actor {nome: "Lupita Nyong'o"}), (m:Movie {nome: 'Pantera Negra'}) MERGE (a)-[:ACTED_IN]->(m) MERGE (b)-[:ACTED_IN]->(m) MERGE (c)-[:ACTED_IN]->(m);
+MATCH (a:Actor {nome: 'Cillian Murphy'}), (b:Actor {nome: 'Emily Blunt'}), (c:Actor {nome: 'Robert Downey Jr.'}), (m:Movie {nome: 'Oppenheimer'}) MERGE (a)-[:ACTED_IN]->(m) MERGE (b)-[:ACTED_IN]->(m) MERGE (c)-[:ACTED_IN]->(m);
+MATCH (a:Actor {nome: 'Mason Thames'}), (b:Actor {nome: 'Madeleine McGraw'}), (c:Actor {nome: 'Ethan Hawke'}), (m:Movie {nome: 'Black Phone'}) MERGE (a)-[:ACTED_IN]->(m) MERGE (b)-[:ACTED_IN]->(m) MERGE (c)-[:ACTED_IN]->(m);
+MATCH (a:Actor {nome: 'Haley Lu Richardson'}), (b:Actor {nome: 'Moises Arias'}), (m:Movie {nome: 'A Cinco Passos de Você'}) MERGE (a)-[:ACTED_IN]->(m) MERGE (b)-[:ACTED_IN]->(m);
+MATCH (a:Actor {nome: 'Tadanobu Asano'}), (b:Actor {nome: 'Nao Ômori'}), (c:Actor {nome: 'Shin\'ya Tsukamoto'}), (m:Movie {nome: 'Ichi the killer'}) MERGE (a)-[:ACTED_IN]->(m) MERGE (b)-[:ACTED_IN]->(m) MERGE (c)-[:ACTED_IN]->(m);
+MATCH (a:Actor {nome: 'Kate Winslet'}), (m:Movie {nome: 'Titanic'}) MERGE (a)-[:ACTED_IN]->(m);
+MATCH (a:Actor {nome: 'Miles Caton'}), (m:Movie {nome: 'Sinners'}) MERGE (a)-[:ACTED_IN]->(m);
+MATCH (a:Actor {nome: 'Allison Williams'}), (b:Actor {nome: 'Violet McGraw'}), (c:Actor {nome: 'Amie Donald'}), (m:Movie {nome: 'M3GAN 2.0'}) MERGE (a)-[:ACTED_IN]->(m) MERGE (b)-[:ACTED_IN]->(m) MERGE (c)-[:ACTED_IN]->(m);
 
-GUSTAVO:
-MATCH(gustavo:User{nome:'Gustavo'}),(pantera:Movie{nome:'Pantera Negra'})
-CREATE(gustavo)-[:WATCHED]->(pantera);
-MATCH(gustavo:User{nome:'Gustavo'}),(tremembe:Movie{nome:'Tremembé'})
-CREATE(gustavo)-[:WATCHED]->(tremembe);
+// Séries
+MATCH (a1:Actor {nome: 'Robert Downey Jr.'}), (a2:Actor {nome: 'Allison Williams'}), (s:Series {nome: 'The Umbrella Academy'}) MERGE (a1)-[:ACTED_IN]->(s) MERGE (a2)-[:ACTED_IN]->(s);
+MATCH (a:Actor {nome: 'Emily Blunt'}), (s:Series {nome: 'WandaVision'}) MERGE (a)-[:ACTED_IN]->(s);
+MATCH (a1:Actor {nome: 'Cillian Murphy'}), (a2:Actor {nome: 'Ethan Hawke'}), (s:Series {nome: 'Black Mirror'}) MERGE (a1)-[:ACTED_IN]->(s) MERGE (a2)-[:ACTED_IN]->(s);
+MATCH (a:Actor {nome: 'Cillian Murphy'}), (s:Series {nome: 'Peaky Blinders'}) MERGE (a)-[:ACTED_IN]->(s);
+MATCH (a1:Actor {nome: 'Bianca Comparato'}), (a2:Actor {nome: 'Marina Ruy Barbosa'}), (s:Series {nome: 'Tremembé'}) MERGE (a1)-[:ACTED_IN]->(s) MERGE (a2)-[:ACTED_IN]->(s);
 
-ACTOR:
-CREATE(:Actor{nome:'Miles Caton'});
-CREATE(:Actor{nome:'Michael B. Jordan'});
-CREATE(:Actor{nome:'Chadwick Boseman'});
-CREATE(:Actor{nome:"Lupita Nyong'o"});
-CREATE(:Actor{nome:'Allison Williams'});
-CREATE(:Actor{nome:'Violet McGraw'});
-CREATE(:Actor{nome:'Amie Donald'});
-CREATE(:Actor{nome:'Tadanobu Asano'});
-CREATE(:Actor{nome:'Nao Ômori'});
-CREATE(:Actor{nome:"Shin'ya Tsukamoto"});
-CREATE(:Actor{nome:'Haley Lu Richardson'});
-CREATE(:Actor{nome:'Moises Arias'});
-CREATE(:Actor{nome:'Cillian Murphy'});
-CREATE(:Actor{nome:'Emily Blunt'});
-CREATE(:Actor{nome:'Robert Downey Jr.'});
-CREATE(:Actor{nome:'Mason Thames'});
-CREATE(:Actor{nome:'Madeleine McGraw'});
-CREATE(:Actor{nome:'Ethan Hawke'});
-CREATE(:Actor{nome:'Bianca Comparato'});
-CREATE(:Actor{nome:'Kate Winslet'});
-CREATE(:Actor{nome:'Marina Ruy Barbosa'});
 
-RELAÇÃO ACTOR E MOVIE:
-// Pantera Negra
-MATCH (a:Actor {nome: 'Michael B. Jordan'}), (b:Actor {nome: 'Chadwick Boseman'}), (c:Actor {nome: "Lupita Nyong'o"}), (m:Movie {nome: 'Pantera Negra'})
-CREATE (a)-[:ACTED_IN]->(m), (b)-[:ACTED_IN]->(m), (c)-[:ACTED_IN]->(m);
-// Oppenheimer
-MATCH (a:Actor {nome: 'Cillian Murphy'}), (b:Actor {nome: 'Emily Blunt'}), (c:Actor {nome: 'Robert Downey Jr.'}), (m:Movie {nome: 'Oppenheimer'})
-CREATE (a)-[:ACTED_IN]->(m), (b)-[:ACTED_IN]->(m), (c)-[:ACTED_IN]->(m);
-// Black PhOne
-MATCH (a:Actor {nome: 'Mason Thames'}), (b:Actor {nome: 'Madeleine McGraw'}), (c:Actor {nome: 'Ethan Hawke'}), (m:Movie {nome: 'Black Phone'})
-CREATE (a)-[:ACTED_IN]->(m), (b)-[:ACTED_IN]->(m), (c)-[:ACTED_IN]->(m);
-// A Cinco Passos de Você
-MATCH (a:Actor {nome: 'Haley Lu Richardson'}), (b:Actor {nome: 'Moises Arias'}), (m:Movie {nome: 'A Cinco Passos de Você'})
-CREATE (a)-[:ACTED_IN]->(m), (b)-[:ACTED_IN]->(m);
-// Ichi the killer
-MATCH (a:Actor {nome: 'Tadanobu Asano'}), (b:Actor {nome: 'Nao Ômori'}), (c:Actor {nome: 'Shin\'ya Tsukamoto'}), (m:Movie {nome: 'Ichi the killer'})
-CREATE (a)-[:ACTED_IN]->(m), (b)-[:ACTED_IN]->(m), (c)-[:ACTED_IN]->(m);
-// Titanic
-MATCH (a:Actor {nome: 'Kate Winslet'}), (m:Movie {nome: 'Titanic'})
-CREATE (a)-[:ACTED_IN]->(m);
-// Sinners (Filme futuro)
-MATCH (a:Actor {nome: 'Miles Caton'}), (m:Movie {nome: 'Sinners'})
-CREATE (a)-[:ACTED_IN]->(m);
-// M3GAN 2.0
-MATCH (a:Actor {nome: 'Allison Williams'}), (b:Actor {nome: 'Violet McGraw'}), (c:Actor {nome: 'Amie Donald'}), (m:Movie {nome: 'M3GAN 2.0'})
-CREATE (a)-[:ACTED_IN]->(m), (b)-[:ACTED_IN]->(m), (c)-[:ACTED_IN]->(m);
+// --------------------------------------------------------
+// 9. RELAÇÃO: DIRETOR E OBRA (DIRECTED)
+// --------------------------------------------------------
+// Filmes
+MATCH (d:Director {nome:'Ryan Coogler'}), (m1:Movie {nome:'Sinners'}), (m2:Movie {nome:'Pantera Negra'}) MERGE (d)-[:DIRECTED]->(m1) MERGE (d)-[:DIRECTED]->(m2);
+MATCH (d:Director {nome:'Gerard Johnstone'}), (m:Movie {nome:'M3GAN 2.0'}) MERGE (d)-[:DIRECTED]->(m);
+MATCH (d:Director {nome:'Takashi Miike'}), (m:Movie {nome:'Ichi the killer'}) MERGE (d)-[:DIRECTED]->(m);
+MATCH (d:Director {nome:'Justin Baldoni'}), (m:Movie {nome:'A Cinco Passos de Você'}) MERGE (d)-[:DIRECTED]->(m);
+MATCH (d:Director {nome:'Christopher Nolan'}), (m:Movie {nome:'Oppenheimer'}) MERGE (d)-[:DIRECTED]->(m);
+MATCH (d:Director {nome:'Scott Derrickson'}), (m:Movie {nome:'Black Phone'}) MERGE (d)-[:DIRECTED]->(m);
 
-DIRECTOR:
-CREATE (:Director {nome:'Jeremy Webb'});
-CREATE (:Director {nome:'Matt Shakman'});
-CREATE (:Director {nome:'Jodie Foster'});
+// Séries
+MATCH (d:Director {nome:'Christopher Nolan'}), (s:Series {nome:'Peaky Blinders'}) MERGE (d)-[:DIRECTED]->(s);
+MATCH (d:Director {nome:'Daniel Lieff'}), (s:Series {nome:'Tremembé'}) MERGE (d)-[:DIRECTED]->(s);
+MATCH (d:Director {nome:'Jeremy Webb'}), (s:Series {nome:'The Umbrella Academy'}) MERGE (d)-[:DIRECTED]->(s);
+MATCH (d:Director {nome:'Matt Shakman'}), (s:Series {nome:'WandaVision'}) MERGE (d)-[:DIRECTED]->(s);
+MATCH (d:Director {nome:'Jodie Foster'}), (s:Series {nome:'Black Mirror'}) MERGE (d)-[:DIRECTED]->(s);
 
-SERIES:
-CREATE (:Series {nome:'The Umbrella Academy', anoLançamento:2019, classificacao:'+16'});
-CREATE (:Series {nome:'WandaVision', anoLançamento:2021, classificacao:'+12'});
-CREATE (:Series {nome:'Black Mirror', anoLançamento:2011, classificacao:'+18'});
 
-CATEGORIAS:
-CREATE (:Genre {nome: 'Ação'});
-CREATE (:Genre {nome: 'Ficção Científica'});
-CREATE (:Genre {nome: 'Suspense'});
-CREATE (:Genre {nome: 'Drama'});
-CREATE (:Genre {nome: 'Romance'});
-CREATE (:Genre {nome: 'Terror'});
-CREATE (:Genre {nome: 'Comédia'});
-CREATE (:Genre {nome: 'História'});
-
-RELACIONAMENTO ENTRE AS SERIES FILMES E GENERO:
-MATCH (m:Movie {nome:'Pantera Negra'}), (g1:Genre {nome:'Ação'}), (g2:Genre {nome:'Ficção Científica'})
-CREATE (m)-[:IN_GENRE]->(g1), (m)-[:IN_GENRE]->(g2);
-MATCH (m:Movie {nome:'Oppenheimer'}), (g1:Genre {nome:'História'}), (g2:Genre {nome:'Drama'})
-CREATE (m)-[:IN_GENRE]->(g1), (m)-[:IN_GENRE]->(g2);
-MATCH (m:Movie {nome:'Black Phone'}), (g1:Genre {nome:'Terror'}), (g2:Genre {nome:'Suspense'})
-CREATE (m)-[:IN_GENRE]->(g1), (m)-[:IN_GENRE]->(g2);
-MATCH (m:Movie {nome:'A Cinco Passos de Você'}), (g1:Genre {nome:'Romance'}), (g2:Genre {nome:'Drama'})
-CREATE (m)-[:IN_GENRE]->(g1), (m)-[:IN_GENRE]->(g2);
-MATCH (m:Movie {nome:'Ichi the killer'}), (g1:Genre {nome:'Terror'}), (g2:Genre {nome:'Ação'})
-CREATE (m)-[:IN_GENRE]->(g1), (m)-[:IN_GENRE]->(g2);
-MATCH (m:Movie {nome:'Titanic'}), (g1:Genre {nome:'Romance'}), (g2:Genre {nome:'Drama'})
-CREATE (m)-[:IN_GENRE]->(g1), (m)-[:IN_GENRE]->(g2);
-MATCH (m:Movie {nome:'M3GAN 2.0'}), (g1:Genre {nome:'Terror'}), (g2:Genre {nome:'Ficção Científica'})
-CREATE (m)-[:IN_GENRE]->(g1), (m)-[:IN_GENRE]->(g2);
-MATCH (s:Series {nome:'Black Mirror'}), (g1:Genre {nome:'Ficção Científica'}), (g2:Genre {nome:'Suspense'})
-CREATE (s)-[:IN_GENRE]->(g1), (s)-[:IN_GENRE]->(g2);
-MATCH (s:Series {nome:'The Umbrella Academy'}), (g1:Genre {nome:'Ficção Científica'}), (g2:Genre {nome:'Ação'})
-CREATE (s)-[:IN_GENRE]->(g1), (s)-[:IN_GENRE]->(g2);
-MATCH (s:Series {nome:'WandaVision'}), (g1:Genre {nome:'Ficção Científica'}), (g2:Genre {nome:'Comédia'})
-CREATE (s)-[:IN_GENRE]->(g1), (s)-[:IN_GENRE]->(g2);
-MATCH (s:Series {nome:'Peaky Blinders'}), (g1:Genre {nome:'Drama'}), (g2:Genre {nome:'História'})
-CREATE (s)-[:IN_GENRE]->(g1), (s)-[:IN_GENRE]->(g2);
-MATCH (m:Movie {nome:'Sinners'}),(g1:Genre {nome:'Terror'}), (g2:Genre {nome:'Suspense'})
-CREATE (m)-[:IN_GENRE]->(g1), (m)-[:IN_GENRE]->(g2)
-RETURN m.nome, g1.nome, g2.nome
-
-RELAÇÃO USER E SERIE:
-MATCH (u:User {nome:'Beatriz'}),(s1:Series {nome:'The Umbrella Academy'}),(s2:Series {nome:'WandaVision'})
-CREATE (u)-[:WATCHED]->(s1), (u)-[:WATCHED]->(s2);
-MATCH (u:User {nome:'Pedro'}),(s1:Series {nome:'Black Mirror'}),(s2:Series {nome:'The Umbrella Academy'})
-CREATE (u)-[:WATCHED]->(s1), (u)-[:WATCHED]->(s2);
-MATCH (u:User {nome:'Carlos'}),(s1:Series {nome:'Tremembé'}),(s2:Series {nome:'Peaky Blinders'})
-CREATE (u)-[:WATCHED]->(s1), (u)-[:WATCHED]->(s2);
-MATCH (u:User {nome:'Aryelle'}),(s:Series {nome:'Black Mirror'})
-CREATE (u)-[:WATCHED]->(s);
-MATCH (u:User {nome:'Felipe'}),(s1:Series {nome:'Peaky Blinders'}),(s2:Series {nome:'Black Mirror'})
-CREATE (u)-[:WATCHED]->(s1), (u)-[:WATCHED]->(s2);
-MATCH (u1:User {nome:'Nathalia'}), (u2:User {nome:'Lucas'}),(s:Series {nome:'Tremembé'})
-CREATE (u1)-[:WATCHED]->(s), (u2)-[:WATCHED]->(s);
-MATCH (u1:User {nome:'Nilton'}), (u2:User {nome:'Larissa'}), (u3:User {nome:'Gustavo'}),(s:Series {nome:'Peaky Blinders'})
-CREATE (u1)-[:WATCHED]->(s), (u2)-[:WATCHED]->(s), (u3)-[:WATCHED]->(s);
-
-RELAÇÃO ENTRE SERIE E ATORES:
-MATCH (a1:Actor {nome: 'Robert Downey Jr.'}), (a2:Actor {nome: 'Allison Williams'}), (s:Series {nome: 'The Umbrella Academy'})
-MERGE (a1)-[:ACTED_IN]->(s)
-MERGE (a2)-[:ACTED_IN]->(s)
-MATCH (a:Actor {nome: 'Emily Blunt'}), (s:Series {nome: 'WandaVision'})
-MERGE (a)-[:ACTED_IN]->(s);
-MATCH (a1:Actor {nome: 'Cillian Murphy'}), (a2:Actor {nome: 'Ethan Hawke'}), (s:Series {nome: 'Black Mirror'})
-MERGE (a1)-[:ACTED_IN]->(s)
-MERGE (a2)-[:ACTED_IN]->(s);
-MATCH (a:Actor {nome: 'Cillian Murphy'}), (s:Series {nome: 'Peaky Blinders'})
-MERGE (a)-[:ACTED_IN]->(s);
-
-DIRETORES E SERIE:
-MATCH (d:Director {nome:'Christopher Nolan'}),(s:Series {nome:'Peaky Blinders'})
-MERGE (d)-[:DIRECTED]->(s);
-MATCH (d:Director {nome:'Jeremy Webb'}),(s:Series {nome:'The Umbrella Academy'})
-MERGE (d)-[:DIRECTED]->(s);
-MATCH (d:Director {nome:'Matt Shakman'}),(s:Series {nome:'WandaVision'})
-MERGE (d)-[:DIRECTED]->(s);
-MATCH (d:Director {nome:'Jodie Foster'}),(s:Series {nome:'Black Mirror'})
-MERGE (d)-[:DIRECTED]->(s);
-
-DIRETORES E FILMES:
-MATCH (d:Director {nome:'Ryan Coogler'}),(m1:Movie {nome:'Sinners'}),(m2:Movie {nome:'Pantera Negra'})
-MERGE (d)-[:DIRECTED]->(m1) 
-MERGE (d)-[:DIRECTED]->(m2);
-MATCH (d:Director {nome:'Gerard Johnstone'}),(m:Movie {nome:'M3GAN 2.0'})
-MERGE (d)-[:DIRECTED]->(m);
-MATCH (d:Director {nome:'Takashi Miike'}),(m:Movie {nome:'Ichi the killer'})
-MERGE (d)-[:DIRECTED]->(m);
-MATCH (d:Director {nome:'Justin Baldoni'}),(m:Movie {nome:'A Cinco Passos de Você'})
-MERGE (d)-[:DIRECTED]->(m);
-MATCH (d:Director {nome:'Christopher Nolan'}),(m:Movie {nome:'Oppenheimer'}),(s:Series {nome:'Peaky Blinders'})
-MERGE (d)-[:DIRECTED]->(m) 
-MERGE (d)-[:DIRECTED]->(s);
-MATCH (d:Director {nome:'Scott Derrickson'}),(m:Movie {nome:'Black Phone'})
-MERGE (d)-[:DIRECTED]->(m);
-MATCH (d:Director {nome:'Daniel Lieff'}),(s:Series {nome:'Tremembé'})
-MERGE (d)-[:DIRECTED]->(s);
-MATCH (d:Director {nome:'Jeremy Webb'}),(s:Series {nome:'The Umbrella Academy'})
-MERGE (d)-[:DIRECTED]->(s);
-MATCH (d:Director {nome:'Matt Shakman'}), (s:Series {nome:'WandaVision'})
-MERGE (d)-[:DIRECTED]->(s);
-MATCH (d:Director {nome:'Jodie Foster'}),(s:Series {nome:'Black Mirror'})
-MERGE (d)-[:DIRECTED]->(s);
-
-DIRETORES E ATORES:
-MATCH (d:Director {nome:'Ryan Coogler'}),(a1:Actor {nome: 'Miles Caton'}), (a2:Actor {nome: 'Michael B. Jordan'}), (a3:Actor {nome: 'Chadwick Boseman'}), (a4:Actor {nome: 'Lupita Nyong\'o'})
-MERGE (d)-[:DIRECTS]->(a1), MERGE (d)-[:DIRECTS]->(a2), MERGE (d)-[:DIRECTS]->(a3), MERGE (d)-[:DIRECTS]->(a4);
-MATCH (d:Director {nome:'Gerard Johnstone'}),(a1:Actor {nome: 'Allison Williams'}), (a2:Actor {nome: 'Violet McGraw'}), (a3:Actor {nome: 'Amie Donald'})
-MERGE (d)-[:DIRECTS]->(a1), MERGE (d)-[:DIRECTS]->(a2), MERGE (d)-[:DIRECTS]->(a3);
-MATCH (d:Director {nome:'Takashi Miike'}),(a1:Actor {nome: 'Tadanobu Asano'}), (a2:Actor {nome: 'Nao Ômori'}), (a3:Actor {nome: 'Shin\'ya Tsukamoto'})
-MERGE (d)-[:DIRECTS]->(a1), MERGE (d)-[:DIRECTS]->(a2), MERGE (d)-[:DIRECTS]->(a3);
-MATCH (d:Director {nome:'Justin Baldoni'}),(a1:Actor {nome: 'Haley Lu Richardson'}), (a2:Actor {nome: 'Moises Arias'})
-MERGE (d)-[:DIRECTS]->(a1), MERGE (d)-[:DIRECTS]->(a2);
-MATCH (d:Director {nome:'Christopher Nolan'}),(a1:Actor {nome: 'Cillian Murphy'}), (a2:Actor {nome: 'Emily Blunt'}), (a3:Actor {nome: 'Robert Downey Jr.'})
-MERGE (d)-[:DIRECTS]->(a1), MERGE (d)-[:DIRECTS]->(a2), MERGE (d)-[:DIRECTS]->(a3);
-MATCH (d:Director {nome:'Scott Derrickson'}),(a1:Actor {nome: 'Mason Thames'}), (a2:Actor {nome: 'Madeleine McGraw'}), (a3:Actor {nome: 'Ethan Hawke'})
-MERGE (d)-[:DIRECTS]->(a1), MERGE (d)-[:DIRECTS]->(a2), MERGE (d)-[:DIRECTS]->(a3);
-MATCH (d:Director {nome:'Daniel Lieff'}),(a1:Actor {nome: 'Bianca Comparato'}), (a2:Actor {nome: 'Marina Ruy Barbosa'})
-MERGE (d)-[:DIRECTS]->(a1), MERGE (d)-[:DIRECTS]->(a2);
+// --------------------------------------------------------
+// 10. RELAÇÃO: DIRETOR E ATOR (DIRECTS)
+// --------------------------------------------------------
+MATCH (d:Director {nome:'Ryan Coogler'}), (a1:Actor {nome: 'Miles Caton'}), (a2:Actor {nome: 'Michael B. Jordan'}), (a3:Actor {nome: 'Chadwick Boseman'}), (a4:Actor {nome: "Lupita Nyong'o"})
+MERGE (d)-[:DIRECTS]->(a1) MERGE (d)-[:DIRECTS]->(a2) MERGE (d)-[:DIRECTS]->(a3) MERGE (d)-[:DIRECTS]->(a4);
+MATCH (d:Director {nome:'Gerard Johnstone'}), (a1:Actor {nome: 'Allison Williams'}), (a2:Actor {nome: 'Violet McGraw'}), (a3:Actor {nome: 'Amie Donald'})
+MERGE (d)-[:DIRECTS]->(a1) MERGE (d)-[:DIRECTS]->(a2) MERGE (d)-[:DIRECTS]->(a3);
+MATCH (d:Director {nome:'Takashi Miike'}), (a1:Actor {nome: 'Tadanobu Asano'}), (a2:Actor {nome: 'Nao Ômori'}), (a3:Actor {nome: "Shin'ya Tsukamoto"})
+MERGE (d)-[:DIRECTS]->(a1) MERGE (d)-[:DIRECTS]->(a2) MERGE (d)-[:DIRECTS]->(a3);
+MATCH (d:Director {nome:'Justin Baldoni'}), (a1:Actor {nome: 'Haley Lu Richardson'}), (a2:Actor {nome: 'Moises Arias'})
+MERGE (d)-[:DIRECTS]->(a1) MERGE (d)-[:DIRECTS]->(a2);
+MATCH (d:Director {nome:'Christopher Nolan'}), (a1:Actor {nome: 'Cillian Murphy'}), (a2:Actor {nome: 'Emily Blunt'}), (a3:Actor {nome: 'Robert Downey Jr.'})
+MERGE (d)-[:DIRECTS]->(a1) MERGE (d)-[:DIRECTS]->(a2) MERGE (d)-[:DIRECTS]->(a3);
+MATCH (d:Director {nome:'Scott Derrickson'}), (a1:Actor {nome: 'Mason Thames'}), (a2:Actor {nome: 'Madeleine McGraw'}), (a3:Actor {nome: 'Ethan Hawke'})
+MERGE (d)-[:DIRECTS]->(a1) MERGE (d)-[:DIRECTS]->(a2) MERGE (d)-[:DIRECTS]->(a3);
+MATCH (d:Director {nome:'Daniel Lieff'}), (a1:Actor {nome: 'Bianca Comparato'}), (a2:Actor {nome: 'Marina Ruy Barbosa'})
+MERGE (d)-[:DIRECTS]->(a1) MERGE (d)-[:DIRECTS]->(a2);
 MATCH (d:Director {nome:'Jeremy Webb'}), (a1:Actor {nome: 'Robert Downey Jr.'}), (a2:Actor {nome: 'Allison Williams'})
-MERGE (d)-[:DIRECTS]->(a1), MERGE (d)-[:DIRECTS]->(a2);
-MATCH (d:Director {nome:'Matt Shakman'}), (a:Actor {nome: 'Emily Blunt'})
-MERGE (d)-[:DIRECTS]->(a);
+MERGE (d)-[:DIRECTS]->(a1) MERGE (d)-[:DIRECTS]->(a2);
+MATCH (d:Director {nome:'Matt Shakman'}), (a:Actor {nome: 'Emily Blunt'}) MERGE (d)-[:DIRECTS]->(a);
 MATCH (d:Director {nome:'Jodie Foster'}), (a1:Actor {nome: 'Cillian Murphy'}), (a2:Actor {nome: 'Ethan Hawke'})
-MERGE (d)-[:DIRECTS]->(a1), MERGE (d)-[:DIRECTS]->(a2);
+MERGE (d)-[:DIRECTS]->(a1) MERGE (d)-[:DIRECTS]->(a2);
 
+
+// --------------------------------------------------------
+// 11. RELAÇÃO: USER E CONSUMO (WATCHED)
+// --------------------------------------------------------
+// User -> Movie
+MATCH (u:User{nome:'Beatriz'}),(m1:Movie{nome:'Sinners'}),(m2:Movie{nome:'Ichi the killer'}),(m3:Movie{nome:'Pantera Negra'})
+CREATE (u)-[:WATCHED]->(m1), (u)-[:WATCHED]->(m2), (u)-[:WATCHED]->(m3);
+MATCH (u:User{nome:'Pedro'}),(m1:Movie{nome:'Sinners'}),(m2:Movie{nome:'M3GAN 2.0'}),(m3:Movie{nome:'Ichi the killer'}),(m4:Movie{nome:'A Cinco Passos de Você'}),(m5:Movie{nome:'Black Phone'}),(m6:Movie{nome:'Pantera Negra'})
+CREATE (u)-[:WATCHED]->(m1), (u)-[:WATCHED]->(m2), (u)-[:WATCHED]->(m3), (u)-[:WATCHED]->(m4), (u)-[:WATCHED]->(m5), (u)-[:WATCHED]->(m6);
+MATCH (u:User{nome:'Carlos'}),(m1:Movie{nome:'Sinners'}),(m2:Movie{nome:'A Cinco Passos de Você'}),(m3:Movie{nome:'Pantera Negra'}),(m4:Movie{nome:'Whiplash'}),(m5:Movie{nome:'Oppenheimer'})
+CREATE (u)-[:WATCHED]->(m1), (u)-[:WATCHED]->(m2), (u)-[:WATCHED]->(m3), (u)-[:WATCHED]->(m4), (u)-[:WATCHED]->(m5);
+MATCH (u:User{nome:'Aryelle'}),(m1:Movie{nome:'Ichi the killer'}),(m2:Movie{nome:'Black Phone'})
+CREATE (u)-[:WATCHED]->(m1), (u)-[:WATCHED]->(m2);
+MATCH (u:User{nome:'Felipe'}),(m1:Movie{nome:'Whiplash'}),(m2:Movie{nome:'Titanic'})
+CREATE (u)-[:WATCHED]->(m1), (u)-[:WATCHED]->(m2);
+MATCH (u:User{nome:'Nathalia'}),(m1:Movie{nome:'A Cinco Passos de Você'}),(m2:Movie{nome:'Oppenheimer'})
+CREATE (u)-[:WATCHED]->(m1), (u)-[:WATCHED]->(m2);
+MATCH (u:User{nome:'Lucas'}),(m:Movie{nome:'Oppenheimer'})
+CREATE (u)-[:WATCHED]->(m);
+MATCH (u:User{nome:'Nilton'}),(m1:Movie{nome:'M3GAN 2.0'}),(m2:Movie{nome:'Titanic'})
+CREATE (u)-[:WATCHED]->(m1), (u)-[:WATCHED]->(m2);
+MATCH (u:User{nome:'Larissa'}),(m1:Movie{nome:'Pantera Negra'}),(s:Series{nome:'Tremembé'})
+CREATE (u)-[:WATCHED]->(m1), (u)-[:WATCHED]->(s);
+MATCH (u:User{nome:'Gustavo'}),(m1:Movie{nome:'Pantera Negra'}),(s:Series{nome:'Tremembé'})
+CREATE (u)-[:WATCHED]->(m1), (u)-[:WATCHED]->(s);
+
+// User -> Series
+MATCH (u:User {nome:'Beatriz'}),(s1:Series {nome:'The Umbrella Academy'}),(s2:Series {nome:'WandaVision'})
+MERGE (u)-[:WATCHED]->(s1) MERGE (u)-[:WATCHED]->(s2);
+MATCH (u:User {nome:'Pedro'}),(s1:Series {nome:'Black Mirror'}),(s2:Series {nome:'The Umbrella Academy'})
+MERGE (u)-[:WATCHED]->(s1) MERGE (u)-[:WATCHED]->(s2);
+MATCH (u:User {nome:'Carlos'}),(s1:Series {nome:'Tremembé'}),(s2:Series {nome:'Peaky Blinders'})
+MERGE (u)-[:WATCHED]->(s1) MERGE (u)-[:WATCHED]->(s2);
+MATCH (u:User {nome:'Aryelle'}),(s:Series {nome:'Black Mirror'})
+MERGE (u)-[:WATCHED]->(s);
+MATCH (u:User {nome:'Felipe'}),(s1:Series {nome:'Peaky Blinders'}),(s2:Series {nome:'Black Mirror'})
+MERGE (u)-[:WATCHED]->(s1) MERGE (u)-[:WATCHED]->(s2);
+MATCH (u1:User {nome:'Nathalia'}), (u2:User {nome:'Lucas'}),(s:Series {nome:'Tremembé'})
+MERGE (u1)-[:WATCHED]->(s) MERGE (u2)-[:WATCHED]->(s);
+MATCH (u1:User {nome:'Nilton'}), (u2:User {nome:'Larissa'}), (u3:User {nome:'Gustavo'}),(s:Series {nome:'Peaky Blinders'})
+MERGE (u1)-[:WATCHED]->(s) MERGE (u2)-[:WATCHED]->(s) MERGE (u3)-[:WATCHED]->(s);
