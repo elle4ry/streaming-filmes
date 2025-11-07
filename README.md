@@ -15,19 +15,19 @@ Abaixo estão as principais entidades (Nós) e suas propriedades:
 ## 🛠️ Relações Implementadas (Ações do Projeto)
 As relações são o coração do grafo, definindo como as entidades se conectam. As seguintes relações foram implementadas:
 
-1. 🧑‍🤝‍🧑 Produção e Autoria
+###🧑‍🤝‍🧑 Produção e Autoria
 |Relação|De (Origem)|Para (Destino)|Tipo de Obra|Exemplo de Uso|
 |----|-----|-----|------|----|
 |`:ACTED_IN`|`Actor`|`Movie` / `Series`|Atuação|`(Actor)-[:ACTED_IN]->(Movie)`|
 |`:DIRECTED`|`Director`|`Movie` / `Series`|Direção|`(Director)-[:DIRECTED]->(Series)`|
 |`:DIRECTS`|`Director`|`Actor`|Direção de Atuação|`(Director)-[:DIRECTS]->(Actor)`|
 
-2. 📺 Consumo e Visualização
+### 📺 Consumo e Visualização
 |Relação|De (Origem)|Para (Destino)|Observação|
 |---|-----|-----|-----|
 |`:WATCHED`|`User`|`Series`|Relação de consumo (assistiu). Implementada sem atributos de avaliação.|
 
-3. 🏷️ Categorização
+### 🏷️ Categorização
 |Relação|De (Origem)|Para (Destino)|Descrição|
 |-------|-----------|--------------|---------|
 |`:IN_GENRE`|`Movie` / `Series`|`Genre`|Classifica a obra dentro de uma ou mais categorias (e.g., `Pantera Negra` é `:IN_GENRE` `Ação`).|
