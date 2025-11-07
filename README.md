@@ -15,7 +15,7 @@ Abaixo estão as principais entidades (Nós) e suas propriedades:
 ## 🛠️ Relações Implementadas (Ações do Projeto)
 As relações são o coração do grafo, definindo como as entidades se conectam. As seguintes relações foram implementadas:
 
-###🧑‍🤝‍🧑 Produção e Autoria
+### 🧑‍🤝‍🧑 Produção e Autoria
 |Relação|De (Origem)|Para (Destino)|Tipo de Obra|Exemplo de Uso|
 |----|-----|-----|------|----|
 |`:ACTED_IN`|`Actor`|`Movie` / `Series`|Atuação|`(Actor)-[:ACTED_IN]->(Movie)`|
